@@ -476,11 +476,16 @@ if (typeof Object.create !== "function") {
                     paginationButton = $("<div/>", {
                         "class" : "owl-page"
                     });
-                    paginationButtonInner = $("<span></span>", {
-                        "text": base.options.paginationNumbers === true ? counter : "",
-                        "class": base.options.paginationNumbers === true ? "owl-numbers" : ""
-                    });
-                    paginationButton.append(paginationButtonInner);
+                    if(base.options.updatePagination) {
+                        paginationButton.append(base.options.updatePagination(base.$userItems[i],counter));
+                    }
+                    else {
+                        paginationButtonInner = $("<span></span>", {
+                            "text": base.options.paginationNumbers === true ? counter : "",
+                            "class": base.options.paginationNumbers === true ? "owl-numbers" : ""
+                        });
+                        paginationButton.append(paginationButtonInner);
+                    }
 
                     paginationButton.data("owl-page", lastPage === i ? lastItem : i);
                     paginationButton.data("owl-roundPages", counter);
@@ -1508,5 +1513,7 @@ if (typeof Object.create !== "function") {
         afterAction : false,
         startDragging : false,
         afterLazyLoad: false
+
+        updatePagination: false
     };
 }(jQuery, window, document));
