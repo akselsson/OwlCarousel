@@ -1512,8 +1512,7 @@ if (typeof Object.create !== "function") {
         afterMove : false,
         afterAction : false,
         startDragging : false,
-        afterLazyLoad: false
-
+        afterLazyLoad: false,
         updatePagination: false
     };
 }(jQuery, window, document));
