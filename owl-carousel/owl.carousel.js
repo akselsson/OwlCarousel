@@ -791,17 +791,19 @@ if (typeof Object.create !== "function") {
                 tempElem = document.createElement("div"),
                 regex,
                 asSupport,
-                support3d,
+                support3d = false,
                 isTouch;
 
-            tempElem.style.cssText = "  -moz-transform:" + translate3D +
-                                  "; -ms-transform:"     + translate3D +
-                                  "; -o-transform:"      + translate3D +
-                                  "; -webkit-transform:" + translate3D +
-                                  "; transform:"         + translate3D;
-            regex = /translate3d\(0px, 0px, 0px\)/g;
-            asSupport = tempElem.style.cssText.match(regex);
-            support3d = (asSupport !== null && asSupport.length === 1);
+            if(this.options.support3d){
+                tempElem.style.cssText = "  -moz-transform:" + translate3D +
+                    "; -ms-transform:"     + translate3D +
+                    "; -o-transform:"      + translate3D +
+                    "; -webkit-transform:" + translate3D +
+                    "; transform:"         + translate3D;
+                regex = /translate3d\(0px, 0px, 0px\)/g;
+                asSupport = tempElem.style.cssText.match(regex);
+                support3d = (asSupport !== null && asSupport.length === 1);
+            }
 
             isTouch = "ontouchstart" in window || window.navigator.msMaxTouchPoints;
 
@@ -1498,6 +1500,7 @@ if (typeof Object.create !== "function") {
 
         addClassActive : false,
         transitionStyle : false,
+        support3d: true,
 
         beforeUpdate : false,
         afterUpdate : false,
